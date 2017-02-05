@@ -4,26 +4,33 @@
     <meta charset="UTF-8">
     <title>Quiz game APP</title>
     <link href="styles/styles.css" rel="stylesheet" type="text/css">
+    <script src="js/state.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/jserviceio-adapter.js"></script>
 </head>
 <body>
     <header>
         <h1>Quiz Game</h1>
     </header>
     <aside class="summary">
-        <div class="total-questions">Total Questions: <span>amount1</span></div>
-        <div class="correct-answers">Correct Answers: <span>amount2</span></div>
+        <div class="total-questions">Total Questions: <span id="sumTotal"></span></div>
+        <div class="correct-answers">Correct Answers: <span id="sumCorrect"></span></div>
     </aside>
     <section>
-        <h1>Question: <span>question</span></h1>
-        <h2>Category: <span>category</span></h2>
-        <p class="question-text"></p>
+        <h1>Question: <span id="qId"></span></h1>
+        <h2>Category: <span id="qCat"></span></h2>
+        <p class="question-text" id="qText"></p>
         <button class="btn btn-secondary">Skip</button>
         <div class="result">Correct</div><!--incorrect-->
         <div class="answer">
-            <div class="answer-area"></div>
-            <div class="answer-letters"></div>
+            <div class="answer-area" id="ansArea"></div>
+            <div class="answer-letters" id="ansLetters"></div>
+            <template id="template"><span></span></template>
         </div>
         <button class="btn btn-primary">Next Question</button>
     </section>
+    <script>
+        render(state, document);
+    </script>
 </body>
 </html>
