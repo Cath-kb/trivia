@@ -1,14 +1,115 @@
 @import "reset.css";
 
+header {
+    padding: 10px 20px;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #fff;
+    background: #0079ff;
+    margin-bottom: 20px;
+}
+.summary {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+}
 section {
     max-width: 600px;
     margin: auto;
+    padding: 0 20px;
+    text-align: center;
+}
+section h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
 }
 button {
     width: 100%;
+    cursor: pointer;
+}
+.btn, .question-text, .summary, .result, .answer-area, .answer-letters {
+    margin-bottom: 20px;
+}
+.btn {
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+.btn-primary {
+    color: #fff;
+    background: linear-gradient(to bottom, #00ab00, #00cd66);
+}
+.btn-primary:hover {
+    background: linear-gradient(to top, #00ab00, #00cd66);
+}
+.btn-secondary {
+    color: #fff;
+    background: linear-gradient(to bottom, #0079ff, #00c0ff);
+}
+.btn-secondary:hover {
+    background: linear-gradient(to top, #0079ff, #00c0ff);
+}
+.result {
+    /*display: none;*/
+    font-weight: bold;
+}
+.result:before {
+    display: inline-block;
+    margin-right: 3px;
+    width: 1em;
+    height: 1em;
+    line-height: 1.1em;
+    font-size: 1.4em;
+    border: 2px solid;
+    border-radius: 50%;
+    vertical-align: -.1em;
+}
+.result.success {
+    color: #468f00;
+}
+.result.success:before {
+    content: '\2713';
+}
+.result.error {
+    color: #c40000;
+}
+.result.error:before {
+    content: '+';
+    transform: rotate(45deg);
+}
+.question-text {
+    padding: 10px 20px;
+    text-align: left;
+    line-height: 1.4;
+    background: #ededed;
+    border-radius: 4px;
 }
 .answer-area {
     padding: 20px;
     border: 1px solid;
     border-radius: 4px;
+}
+.answer-area span, .answer-letters span {
+    margin: 0 1px;
+    display: inline-block;
+    width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8;
+    background: linear-gradient(to top, #d8d8d8, #f7f7f7);
+    border: 1px solid #999;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.answer-area span:hover, .answer-letters span:hover {
+    background: linear-gradient(to bottom, #d8d8d8, #f7f7f7);
 }
