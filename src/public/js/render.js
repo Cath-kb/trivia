@@ -6,7 +6,7 @@ function render(state, document) {
     document.getElementById('qCat').innerText = state.currentQuestion.category.title;
     document.getElementById('qText').innerText = state.currentQuestion.question;
     
-    var formattedAnswer = state.currentQuestion.answer.replace(/\u003C\/?(\w)+\u003E/g, '');
+    var formattedAnswer = correctAnswer(state);
     var randomLettersArr = formattedAnswer.split('').sort(function() { return 0.5 - Math.random() });
     console.log('answer: ', formattedAnswer, 'randomLettersArr: ', randomLettersArr);
     
@@ -15,8 +15,31 @@ function render(state, document) {
     appendFragment(state.availableLetters, 'ansLetters', templateFragment);
     appendFragment(state.currentAnswer, 'ansArea', templateFragment);
 
+    const result = document.getElementById('result');
+    const skip = document.getElementById('skip');
+    const nextQuestion = document.getElementById('nextQuestion');
+
+    result.classList.remove('success');
+    result.classList.remove('error');
+    skip.style.display = 'block';
+    nextQuestion.style.display = 'none';
+    
+    if (isAnswerFulfilled(state)) {
+        if (isAnswerCorrect(state)) {
+            result.classList.add('success');
+            result.innerText = 'Correct';
+            skip.style.display = 'none';
+            nextQuestion.style.display = 'block';
+            
+        } else {
+            result.classList.add('error');
+            result.innerText = 'Incorrect';
+        }
+    }
+
     function appendFragment(str, nodeId, template) {
         var node = document.getElementById(nodeId);
+        node.innerHTML = '';
         for (var i = 0; i < str.length; i++) {
             const fragment = template.cloneNode(true);
             fragment.firstChild.textContent = str[i];
@@ -24,4 +47,14 @@ function render(state, document) {
         }
     }
 
+}
+
+function handleLetterToAnswer(index) {
+    moveLetterToAnswer(state, index);
+    render(state, document);
+}
+
+function handleLetterToLetters(index) {
+    moveLetterToLetters(state, index);
+    render(state, document);
 }

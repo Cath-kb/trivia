@@ -20,14 +20,14 @@
         <h1>Question: #<span id="qId"></span></h1>
         <h2>Category: <span id="qCat"></span></h2>
         <p class="question-text" id="qText"></p>
-        <button class="btn btn-secondary">Skip</button>
-        <div class="result success">Correct</div><!--incorrect-->
+        <button id="skip" class="btn btn-secondary">Skip</button>
+        <div id="result" class="result"></div>
         <div class="answer">
             <div class="answer-area" id="ansArea"></div>
             <div class="answer-letters" id="ansLetters"></div>
             <template id="template"><span></span></template>
         </div>
-        <button class="btn btn-primary">Next Question</button>
+        <button id="nextQuestion" class="btn btn-primary">Next Question</button>
     </section>
     <script>
         render(state, document);

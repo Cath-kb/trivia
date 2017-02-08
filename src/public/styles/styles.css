@@ -59,9 +59,15 @@ button {
 .btn-secondary:hover {
     background: linear-gradient(to top, #0079ff, #00c0ff);
 }
+#nextButton, #nextQuestion {
+    display: none;
+}
 .result {
-    /*display: none;*/
+    display: none;
     font-weight: bold;
+}
+.result.success, .result.error {
+    display: block;
 }
 .result:before {
     display: inline-block;

@@ -23,3 +23,30 @@ const state = {
     currentAnswer: 'Pple',
     availableLetters: 'oe'
 };
+
+function moveLetterToAnswer(state, index) {
+    const letters = state.availableLetters.split('');
+    state.currentAnswer = state.currentAnswer.concat(letters.splice(index, 1)[0]);
+    state.availableLetters = letters.join('');
+    if (isAnswerCorrect(state)) {
+        state.correctAnswers++;
+    }
+}
+
+function moveLetterToLetters(state, index) {
+    const letters = state.currentAnswer.split('');
+    state.availableLetters = state.availableLetters.concat(letters.splice(index, 1)[0]);
+    state.currentAnswer = letters.join('');
+}
+
+function correctAnswer(state) {
+    return state.currentQuestion.answer.replace(/\u003C\/?(\w)+\u003E/g, '')
+}
+
+function isAnswerCorrect(state) {
+    return state.currentAnswer === correctAnswer(state);
+}
+
+function isAnswerFulfilled(state) {
+    return state.availableLetters === '';
+}
