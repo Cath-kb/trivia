@@ -119,3 +119,9 @@ button {
 .answer-area span:hover, .answer-letters span:hover {
     background: linear-gradient(to bottom, #d8d8d8, #f7f7f7);
 }
+
+.success ~ .answer .answer-area span {
+    background: linear-gradient(to bottom, #15b900, #75ff57);
+    color: #444;
+    cursor: default;
+}

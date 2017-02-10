@@ -12,8 +12,8 @@ function render(state, document) {
     
     const templateFragment = document.getElementById('template').content;
     
-    appendFragment(state.availableLetters, 'ansLetters', templateFragment);
-    appendFragment(state.currentAnswer, 'ansArea', templateFragment);
+    appendFragment(state.availableLetters, 'ansLetters', templateFragment, !isAnswerCorrect(state));
+    appendFragment(state.currentAnswer, 'ansArea', templateFragment, !isAnswerCorrect(state));
 
     const result = document.getElementById('result');
     const skip = document.getElementById('skip');
@@ -30,31 +30,35 @@ function render(state, document) {
             result.innerText = 'Correct';
             skip.style.display = 'none';
             nextQuestion.style.display = 'block';
-            
         } else {
             result.classList.add('error');
             result.innerText = 'Incorrect';
         }
     }
 
-    function appendFragment(str, nodeId, template) {
+    function appendFragment(str, nodeId, template, handleOnClick) {
         var node = document.getElementById(nodeId);
         node.innerHTML = '';
-        for (var i = 0; i < str.length; i++) {
+        for (let i = 0; i < str.length; i++) {
             const fragment = template.cloneNode(true);
             fragment.firstChild.textContent = str[i];
+            if (handleOnClick) {
+                fragment.firstChild.onclick = onLetterClick.bind(null, nodeId, i);
+            }
             node.appendChild(fragment);
         }
     }
 
 }
 
-function handleLetterToAnswer(index) {
-    moveLetterToAnswer(state, index);
-    render(state, document);
-}
-
-function handleLetterToLetters(index) {
-    moveLetterToLetters(state, index);
+function onLetterClick(node, index) {
+    switch (node) {
+        case 'ansArea':
+            moveLetterToLetters(state, index);
+            break;
+        case 'ansLetters':
+            moveLetterToAnswer(state, index);
+            break;
+    }
     render(state, document);
 }
