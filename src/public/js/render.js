@@ -2,8 +2,8 @@ function render(state, document) {
 
     document.getElementById('sumTotal').innerText = state.totalQuestions;
     document.getElementById('sumCorrect').innerText = state.correctAnswers;
-    document.getElementById('qId').innerText = state.currentQuestion.id;
-    document.getElementById('qCat').innerText = state.currentQuestion.category.title;
+    document.getElementById('qId').innerText = state.currentQuestion.id || 'NA';
+    document.getElementById('qCat').innerText = state.currentQuestion.category;
     document.getElementById('qText').innerText = state.currentQuestion.question;
     
     const templateFragment = document.getElementById('template').content;
