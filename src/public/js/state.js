@@ -1,7 +1,12 @@
 const state = {
     totalQuestions: 0,
     correctAnswers: 0,
-    currentQuestion: {},
+    currentQuestion: {
+        id: null,
+        category: '',
+        question: '',
+        answer: ''
+    },
     currentAnswer: '',
     availableLetters: ''
 };
@@ -21,12 +26,8 @@ function moveLetterToLetters(state, index) {
     state.currentAnswer = letters.join('');
 }
 
-function correctAnswer(state) {
-    return state.currentQuestion.answer.replace(/\u003C\/?(\w)+\u003E/g, '')
-}
-
 function isAnswerCorrect(state) {
-    return state.currentAnswer === correctAnswer(state);
+    return state.currentAnswer === state.currentQuestion.answer;
 }
 
 function isAnswerFulfilled(state) {
@@ -34,11 +35,10 @@ function isAnswerFulfilled(state) {
 }
 
 function getQuestion(state) {
-    const data = getData();
-    state.currentQuestion = data;
+    state.currentQuestion = getOpentdbQuestion();
     state.currentAnswer = '';
     state.totalQuestions++;
-    const formattedAnswer = correctAnswer(state);
-    console.log('answer: ', formattedAnswer);
-    state.availableLetters = formattedAnswer.split('').sort(function() { return 0.5 - Math.random() }).join('');
+    const answer = state.currentQuestion.answer;
+    console.log('answer: ', answer);
+    state.availableLetters = answer.split('').sort(function() { return 0.5 - Math.random() }).join('');
 }
