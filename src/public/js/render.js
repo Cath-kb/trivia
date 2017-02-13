@@ -14,12 +14,14 @@ function render(state, document) {
     const result = document.getElementById('result');
     const skip = document.getElementById('skip');
     const nextQuestion = document.getElementById('nextQuestion');
+    const chooseService = document.getElementById('chooseService');
 
     result.classList.remove('success');
     result.classList.remove('error');
     skip.style.display = 'block';
     nextQuestion.style.display = 'none';
     skip.onclick = nextQuestion.onclick = getQuestionHandler;
+    chooseService.onchange = onSwitchAdapterClick;
     
     if (isAnswerFulfilled(state)) {
         if (isAnswerCorrect(state)) {
@@ -63,4 +65,12 @@ function onLetterClick(node, index) {
 function getQuestionHandler() {
     getQuestion(state);
     render(state, document);
+}
+
+function onSwitchAdapterClick(e) {
+    if (e.target.value !== state.sourceAdapter) {
+        state.sourceAdapter = e.target.value;
+        getQuestion(state);
+        render(state, document);
+    }
 }
