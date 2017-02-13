@@ -8,7 +8,8 @@ const state = {
         answer: ''
     },
     currentAnswer: '',
-    availableLetters: ''
+    availableLetters: '',
+    sourceAdapter: 'opentdb'
 };
 
 function moveLetterToAnswer(state, index) {
@@ -34,8 +35,21 @@ function isAnswerFulfilled(state) {
     return state.availableLetters === '';
 }
 
+function getAdapter(state) {
+    let adapter;
+    switch (state.sourceAdapter) {
+        case 'opentdb':
+            adapter = getOpentdbQuestion;
+            break;
+        case 'jservice':
+            adapter = getJServiceQuestion;
+            break;
+    }
+    return adapter;
+}
+
 function getQuestion(state) {
-    state.currentQuestion = getOpentdbQuestion();
+    state.currentQuestion = getAdapter(state)();
     state.currentAnswer = '';
     state.totalQuestions++;
     const answer = state.currentQuestion.answer;

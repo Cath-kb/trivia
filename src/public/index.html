@@ -5,9 +5,9 @@
     <title>Quiz game APP</title>
     <link href="styles/styles.css" rel="stylesheet" type="text/css">
     <script src="js/utils/decodeHtml.js"></script>
+    <script src="js/adapters.js"></script>
     <script src="js/state.js"></script>
     <script src="js/render.js"></script>
-    <script src="js/jserviceio-adapter.js"></script>
 </head>
 <body>
     <header>
@@ -15,6 +15,13 @@
     </header>
     <aside class="container summary">
         <div class="total-questions">Total Questions: <span id="sumTotal"></span></div>
+        <div>
+            <label for="chooseService">Choose trivia questions source:</label>
+            <select id="chooseService">
+                <option value="opentdb" selected>opentdb.com</option>
+                <option value="jservice">jservice.io</option>
+            </select>
+        </div>
         <div class="correct-answers">Correct Answers: <span id="sumCorrect"></span></div>
     </aside>
     <section>
